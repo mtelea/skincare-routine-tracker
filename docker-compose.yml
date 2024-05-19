@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: skincare
+    ports:
+      - '8889:5432'
