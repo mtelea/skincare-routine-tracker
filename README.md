@@ -6,7 +6,7 @@ The Skincare Routine Tracker is a simple app that helps you keep track of your s
 ## Tech stack:
 - Node JS backend for CRUD operations on routines, products and for user authentication.
 - Prisma ORM with PostgreSQL database
-- Swagger documented API's
+- Swagger documented API's available at `http://{host}:{port}/api-docs`. By default, application will run on `http://localhost:3000`
 
 ## Features
 - JWT based authentication
