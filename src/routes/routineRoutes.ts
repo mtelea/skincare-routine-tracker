@@ -35,7 +35,11 @@ const router = Router();
  *                 type: string
  *     responses:
  *       201:
- *         description: The routine was successfully created
+ *         description: The routine was successfully created. Returns created resource
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
  */
 router.post(
   '/',
@@ -44,6 +48,7 @@ router.post(
   validateRequest,
   createRoutine,
 );
+
 /**
  * @swagger
  * /routines:
@@ -52,9 +57,20 @@ router.post(
  *     tags: [Skincare Routine]
  *     security:
  *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: name
+ *         schema:
+ *           type: string
+ *         description: The name of the routine to search for. (contains)
+ *         required: false
  *     responses:
  *       200:
- *         description: A list of routines
+ *         description: A list of routines.
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
  */
 router.get('/', authenticateToken, getRoutines);
 
@@ -74,7 +90,11 @@ router.get('/', authenticateToken, getRoutines);
  *           type: string
  *     responses:
  *       200:
- *         description: A single routine
+ *         description: A single routine by id
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
  */
 router.get(
   '/:id',
@@ -111,6 +131,10 @@ router.get(
  *     responses:
  *       200:
  *         description: The routine was successfully updated
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *        description: Forbidden
  */
 router.put(
   '/:id',
@@ -136,8 +160,12 @@ router.put(
  *         schema:
  *           type: string
  *     responses:
- *       200:
+ *       204:
  *         description: The routine was successfully deleted
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
  */
 router.delete(
   '/:id',

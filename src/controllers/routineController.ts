@@ -33,7 +33,9 @@ export const getRoutines = async (
   next: NextFunction,
 ) => {
   try {
+    const name = req.query.name as string;
     const routines = await prisma.routine.findMany({
+      where: { name: { contains: name || '' } },
       include: {
         products: {
           include: {

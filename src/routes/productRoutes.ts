@@ -41,7 +41,11 @@ const router = Router();
  *                 type: number
  *     responses:
  *       201:
- *         description: The product was successfully created
+ *         description: The product was successfully created. Returns created resource
+ *       401: 
+ *          description: Unauthorized
+ *       403: 
+ *          description: Forbidden
  */
 router.post(
   '/',
@@ -60,9 +64,28 @@ router.post(
  *     tags: [ Skincare Products]
  *     security:
  *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *         description: The page number
+ *         required: false
+ *       - in: query
+ *         name: pageSize
+ *         schema:
+ *           type: integer
+ *           default: 10
+ *         description: The number of items per page
+ *         required: false
  *     responses:
  *       200:
- *         description: A list of products
+ *         description: A list of products, paginated by default to 10 items per page, page 1
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
  */
 router.get('/', authenticateToken, getProducts);
 
@@ -83,6 +106,10 @@ router.get('/', authenticateToken, getProducts);
  *     responses:
  *       200:
  *         description: A single product
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
  */
 router.get(
   '/:id',
@@ -123,7 +150,11 @@ router.get(
  *                 type: number
  *     responses:
  *       200:
- *         description: The product was successfully updated
+ *         description: The product was successfully updated. Returns updated resource
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
  */
 router.put(
   '/:id',
@@ -150,8 +181,12 @@ router.put(
  *         schema:
  *           type: string
  *     responses:
- *       200:
+ *       204:
  *         description: The product was successfully deleted
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
  */
 router.delete(
   '/:id',
